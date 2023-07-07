@@ -1,0 +1,44 @@
+from news_paper.models import *
+u1 = User.objects.create_user(username=‘Petr’)
+u2 = User.objects.create_user(username=‘Ivan’)
+Author.objects.create(authorUser=u1)
+Author.objects.create(authorUser=u2)
+Category.objects.create(name=‘Sport’)
+Category.objects.create(name=‘Politic’)
+Category.objects.create(name=‘Education’)
+Category.objects.create(name=‘IT’)
+Post.objects.create(author=Author.objects.get(id=1), type=’NW’, header=‘header1’, text=‘texttexttext111’)
+Post.objects.create(author=Author.objects.get(id=1), type=’AR’, header=‘header2’, text=‘texttexttext222’)
+Post.objects.create(author=Author.objects.get(id=2), type=’AR’, header=‘header3’, text=‘texttexttext333’)
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=2))
+Post.objects.get(id=2).postCategory.add(Category.objects.get(id=3))
+Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=1).authorUser, text=‘text_text_111’)
+Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=2).authorUser, text=‘text_text_222’)
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=1).authorUser, text=‘text_text_333’)
+Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=Author.objects.get(id=2).authorUser, text=‘text_text_444’)
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=1).like()
+Comment.objects.get(id=2).dislike()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=4).like()
+Post.objects.get(id=1).like()
+Post.objects.get(id=2).like()
+Post.objects.get(id=3).dislike()
+Author.objects.get(id=1).update_rating()
+Author.objects.get(id=2).update_rating()
+a = Author.objects.order_by(‘-authorRating’)[:1]
+for i in a
+	i.authorRating
+	i.authorUser.username
+b = Post.objects.filter(type=‘AR’)
+for i in b.order_by(‘-rating’)[:1]:
+	i.author.authorUser.username
+	i.rating
+	i.header
+	i.preview()
+for i in Comment.objects.filter(commentPost_id=b.order_by('-rating')[:1]):
+	i.createTime
+	i.commentUser.username
+	i.rating
+	i.text
