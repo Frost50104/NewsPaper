@@ -20,20 +20,10 @@ class Author(models.Model):
         self.authorRating = pRat * 3 + cRat
         self.save()
 
-    # def update_rating(self):
-    #     UpRatingPost = self.post_set.aggregate(postrating=sum('rating'))
-    #     prating = 0
-    #     prating += UpRatingPost.get('postrating')
-    #
-    #     UpRatingComment = self.authorUser.comment_set.aggregate(commentrating=sum('(rating)'))
-    #     crating = 0
-    #     crating += UpRatingComment.get('commentrating')
-    #
-    #     self.authorRating = prating * 3 + crating
-    #     self.save()
 
 class Category(models.Model):
     categoryname = models.CharField(max_length=64, unique=True)
+
 
 class Post(models.Model):
 
@@ -63,6 +53,7 @@ class Post(models.Model):
 
     def preview(self):
         return self.text[0:123] + '...'
+
 
 class PostCategory(models.Model):
     postThrough = models.ForeignKey(Post, on_delete=models.CASCADE)
